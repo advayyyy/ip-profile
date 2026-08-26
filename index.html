@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Profile</title>
+    <meta name="description" content="IP Profile is a fast, clean, and accurate tool to track and locate any IP address globally. Find geolocation, ISP, and network details instantly.">
+    <meta name="keywords" content="IP Profile, IP tracker, locate IP, IP address lookup, geolocation, ISP tracker, cybersecurity tool, Advaya">
+    <meta name="author" content="Advaya">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IP Profile - Locate Any IP">
+    <meta property="og:description" content="Track and locate any IP address globally with IP Profile. Fast, accurate, and simple.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="IP Profile - Locate Any IP">
+    <meta name="twitter:description" content="Track and locate any IP address globally with IP Profile. Fast, accurate, and simple.">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div class="ui-panel">
+        <div class="header">
+            <h1>IP Profile</h1>
+            <p>Locate and trace any IP address.</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="ip-input" placeholder="e.g. 8.8.8.8" autocomplete="off">
+            <button onclick="searchIP()" id="search-btn">Search</button>
+        </div>
+
+        <div class="results" id="results-box"></div>
+
+        <div class="footer">
+            <a href="https://advaya.pages.dev" target="_blank">Developed by Advaya</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
