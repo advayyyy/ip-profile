@@ -1,0 +1,65 @@
+const map = L.map('map', { zoomControl: false }).setView([20, 0], 2);
+L.control.zoom({ position: 'topright' }).addTo(map);
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 16
+}).addTo(map);
+
+let marker;
+const resultsBox = document.getElementById('results-box');
+const searchBtn = document.getElementById('search-btn');
+
+const cyberIcon = L.divIcon({
+    className: 'custom-marker',
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+});
+
+async function searchIP() {
+    const ip = document.getElementById('ip-input').value.trim();
+    searchBtn.innerText = "Wait...";
+    resultsBox.classList.remove('active');
+    
+    const apiUrl = ip ? `https://ipapi.co/${ip}/json/` : 'https://ipapi.co/json/';
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        searchBtn.innerText = "Search";
+        resultsBox.classList.add('active');
+
+        if (data.error) {
+            resultsBox.innerHTML = `<div class="error-msg">Invalid IP. Please try again.</div>`;
+            return;
+        }
+
+        resultsBox.innerHTML = `
+            <div class="result-item">
+                <div class="result-label">IP Address</div>
+                <div class="result-value">${data.ip}</div>
+            </div>
+            <div class="result-item">
+                <div class="result-label">Location</div>
+                <div class="result-value">${data.city}, ${data.country_name}</div>
+            </div>
+            <div class="result-item">
+                <div class="result-label">Internet Provider</div>
+                <div class="result-value">${data.org}</div>
+            </div>
+        `;
+
+        const lat = data.latitude;
+        const lon = data.longitude;
+        
+        map.flyTo([lat, lon], 12, { duration: 1.5 });
+
+        if (marker) map.removeLayer(marker);
+        marker = L.marker([lat, lon], { icon: cyberIcon }).addTo(map);
+        
+    } catch (error) {
+        searchBtn.innerText = "Search";
+        resultsBox.classList.add('active');
+        resultsBox.innerHTML = `<div class="error-msg">Network error. Check your connection.</div>`;
+    }
+}
