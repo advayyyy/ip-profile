@@ -2,7 +2,7 @@
 
 A fast, clean, and accurate tool to track and locate any IP address globally. Get instant geolocation, ISP, and network details.
 
-**[🔴 Live Demo Here](https://advaya.pages.dev/ip-profile)** *(Update this link if you host it elsewhere)*
+**[🔴 Live Demo Here](https://advayyyy.github.io/ip-profile)** *(Update this link if you host it elsewhere)*
 
 ---
 
